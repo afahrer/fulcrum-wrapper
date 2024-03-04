@@ -63,15 +63,17 @@ main:
   # Specifies where to mount the data volume(s), if there are any. Mounts for pointer dependency volumes are also denoted here. These are necessary if data needs to be read from / written to these volumes. 
   mounts:
     # Specifies where on the service's file system its persistence directory should be mounted prior to service startup
-    main: /root
+    main: /data
 # This is where health checks would be defined - see a more advanced example in https://github.com/Start9Labs/start-pages-wrapper
 health-checks: {}
-config: ~
-properties: ~
-#  type: script
-# This denotes any data, asset, or pointer volumes that should be connected when the "docker run" command is invoked
+config:
+  get:
+    type: script
+  set:
+    type: script
+properties:
+  type: script
 volumes:
-  # This is the image where files from the project asset directory will go
   main:
     type: data
 # This specifies how to configure the port mapping for exposing the service over TOR and LAN (if applicable). Many interfaces can be specified depending on the needs of the service. If it can be launched over a Local Area Network connection, specify a `lan-config`. Otherwise, at minimum, a `tor-config` must be specified.
