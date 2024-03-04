@@ -81,7 +81,8 @@ interfaces:
   # This key is the internal name that the OS will use to configure the interface
   main:
     name: Electrum Interface
-    description: Do not use the URL below.  Instead, look in electrs' Properties section for your electrum server address.    tor-config:
+    description: Do not use the URL below.  Instead, look in electrs' Properties section for your electrum server address.
+    tor-config:
       port-mapping:
         50001: "50001"
     # Denotes if the service has a user interface to display
