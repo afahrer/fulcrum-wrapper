@@ -14,16 +14,10 @@ RUN qmake -makefile PREFIX=/usr Fulcrum.pro && \
 
 FROM debian:bookworm-slim AS final
 
-RUN apt-get update -qqy && \
-    apt-get upgrade -qqy && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qqy --no-install-recommends \
-    bash \
-    curl \
-    tini \
-    netcat-openbsd \
-    ca-certificates \
-    librocksdb7.8 && \
-    rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+RUN apt update && \
+    apt install -y openssl libqt5network5 zlib1g libbz2-1.0 libjemalloc2 libzmq5 bash curl tini && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ARG ARCH
 ARG PLATFORM
