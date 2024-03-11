@@ -1,3 +1,7 @@
 #!/bin/sh
-ls
+
+set -e
+
+configurator
+
 exec tini Fulcrum
