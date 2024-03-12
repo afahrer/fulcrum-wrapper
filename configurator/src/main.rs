@@ -1,9 +1,7 @@
 use std::fs::File;
 use std::io::Write;
 
-use http::Uri;
 use serde::{
-    de::{Deserializer, Error as DeserializeError, Unexpected},
     Deserialize,
 };
 
