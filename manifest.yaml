@@ -1,6 +1,6 @@
 id: fulcrum
 title: "fulcrum"
-version: 1.0.0.1
+version: 1.10.0
 release-notes: "Revamped for EmabssyOS 0.3.3"
 license: GPL-3.0
 wrapper-repo: "https://github.com/afahrer/Fulcrum-wrapper"
@@ -24,13 +24,18 @@ main:
   mounts:
     main: /data
 health-checks: {}
-config: ~
-properties: ~
+config:
+  get:
+    type: script
+  set:
+    type: script
+properties:
+  type: script
 volumes:
   main:
     type: data
 interfaces:
-  main:
+  electrum:
     name: Electrum Interface
     description: Do not use the URL below.  Instead, look in electrs' Properties section for your electrum server address.
     tor-config:
@@ -40,34 +45,22 @@ interfaces:
     protocols:
       - tcp
       - json-rpc
-dependencies: {}
+dependencies:
+  bitcoind:
+    version: ">=0.21.1.2 <27.0.0"
+    requirement:
+      type: "required"
+    description: Needed for peer interface and rpc interface.
+    config:
+      check:
+        type: script
+      auto-configure:
+        type: script
 backup:
   create:
-    type: docker
-    image: compat
-    system: true 
-    entrypoint: compat 
-    args:
-      - duplicity
-      - create
-      - /mnt/backup
-      - /root/data
-    mounts:
-      BACKUP: "/mnt/backup" 
-      main: "/root/data"
+    type: script
   restore:
-    type: docker
-    image: compat
-    system: true
-    entrypoint: compat
-    args:
-      - duplicity
-      - restore
-      - /mnt/backup
-      - /root/data
-    mounts:
-      BACKUP: "/mnt/backup"
-      main: "/root/data"
+    type: script
 migrations:
   from:
     "*":

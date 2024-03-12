@@ -3,5 +3,6 @@
 set -e
 
 configurator
-
-exec tini Fulcrum
+cat /data/start9/config.yaml
+cat fulcrum.conf
+exec tini ./Fulcrum fulcrum.conf
