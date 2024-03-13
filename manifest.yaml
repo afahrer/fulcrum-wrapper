@@ -24,26 +24,29 @@ main:
   mounts:
     main: /data
 health-checks: 
-  electrum:
-    name: Electrum RPC Interface
-    success-message: The electrum RPC interface is alive and responding to basic commands.
-    type: docker
-    image: main
-    entrypoint: "check-electrum.sh"
-    args: []
-    inject: true
-    system: false
-    io-format: json
-  getinfo:
-    name: Get info
-    success-message: The indexes are built and the electrum interface is fully operational. You may now connect a wallet.
-    type: docker
-    image: main
-    entrypoint: "fulcrum-getinfo.sh"
-    args: []
-    inject: true
-    system: false
-    io-format: json
+  web-ui:
+    name: Web Interface
+    success-message: The RoboSats UI is ready
+    type: script
+  #electrum:
+  #  name: Electrum RPC Interface
+  #  success-message: The electrum RPC interface is alive and responding to basic commands.
+  #  type: docker
+  #  image: main
+  #  entrypoint: "check-electrum.sh"
+  #  args: []
+  #  io-format: json
+  #  inject: true
+  #getinfo:
+  #  name: Get info
+  #  success-message: The indexes are built and the electrum interface is fully operational. You may now connect a wallet.
+  #  type: docker
+  #  image: main
+  #  entrypoint: "fulcrum-getinfo.sh"
+  #  args: []
+  #  inject: true
+  #  system: false
+  #  io-format: json
 config:
   get:
     type: script
@@ -55,6 +58,20 @@ volumes:
   main:
     type: data
 interfaces:
+  stats:
+    name: Stats Interface
+    description: Fulcrum stats Interface
+    tor-config:
+      port-mapping:
+        80: "8080"
+    lan-config:
+      443:
+        ssl: true
+        internal: 8080
+    ui: true
+    protocols:
+      - tcp
+      - http
   electrum:
     name: Electrum Interface
     description: Do not use the URL below.  Instead, look in electrs' Properties section for your electrum server address.

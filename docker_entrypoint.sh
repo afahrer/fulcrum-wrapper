@@ -31,6 +31,7 @@ data:
     masked: false
 EOF
 
+cat /proc/sys/kernel/hostname
+
 configurator
-FulcrumAdmin -h
 exec tini Fulcrum fulcrum.conf

@@ -10,7 +10,6 @@ use serde::{
 struct Config {
     user: String,
     password: String,
-    electrum_tor_address: String,
 }
 
 fn main() -> Result<(), anyhow::Error> {
@@ -42,7 +41,6 @@ fn main() -> Result<(), anyhow::Error> {
             bitcoin_rpc_pass = config.password,
             bitcoin_rpc_host = "bitcoind.embassy",
             bitcoin_rpc_port = 8332,
-            electrum_tor_address = config.electrum_tor_address
         )?;
     }
 

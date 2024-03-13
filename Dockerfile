@@ -38,8 +38,7 @@ RUN chmod a+x /usr/local/bin/fulcrum-getinfo.sh
 WORKDIR /data
 
 # Electrum RPC
-EXPOSE 50001
-EXPOSE 8000
+EXPOSE 50001 8080
 
 STOPSIGNAL SIGINT
 
